@@ -127,8 +127,12 @@ const makePaletteGradient = ()=>{
       //create palette
     let pdivs = "";
     //create palette of colors
+    document.querySelector('#palettecolor').innerHTML = '';
     paletteList[currentPalette].forEach(elem=>{
-      pdivs += `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
+      let div = document.createElement('div');
+      div.innerHTML = `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
+      document.querySelector('#palettecolor').appendChild(div);
+      //pdivs += `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
     });
     document.querySelector('#palettecolor').innerHTML = pdivs;
   }
