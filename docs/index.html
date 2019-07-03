@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+ <link rel="stylesheet" href="assets/style.min.css">
+ <title>Pixel it - Create pixel art from an image</title>
+</head>
+<body>
+  <header>
+   <h1>Pixel it<span></span></h1>
+   <p>Javascript library to create pixel art from an image.</p>
+   <div class="actions">
+      <a href="#tryit" class="btn call">try it</a>
+      <a href="#examples" class="btn ">examples</a>
+      <a href="#docs" class="btn">Documentation</a>
+   </div>
+  
+  </header>
+ <section class="example" id="examples">
+   <div class="wrap">
+    <p>Pixel it allows that you take an image and convert it to a pixel art image. You can define the "pixel" size, create a pixel image using a color palette and also convert to a pixel grayscale image.</p> 
+    <p>You can use pixel it to be your jump start to make some pixel art. Check the documentation for all the availanle api methods.</p>
+    
+    <h2>Default usage</h2>
+    <p>Blocksize of 7 and no other modification</p>
+    <img src="assets/px-normal.jpg" alt="image pixelated block 4">
+    
+    <h2>Color palette</h2>
+    <p>Blocksize of 17 and a 4 Color palette</p>
+    <img src="assets/px-palette4c.jpg" alt="image pixelated 4c palette">
+
+    <h2>Greyscale</h2>
+    <p>blocksize of 10 and greyscale</p>
+    <img src="assets/px-grey.jpg" alt="image pixelated greyscale">
+
+    <h2>Color palette</h2>
+    <p>Blocksize of 8 and a 16 Color palette</p>
+    <img src="assets/px-16cp.jpg" alt="image pixelated 16c palette">
+
+    </div>
+  </section>
+<section class="working">
+  <div class="wrap">
+  <h2>Pixel it now</h2>
+  <p>You can try pixel it live here, you can use the default image (just change some value) or upload an image to start see the changes.</p>
+
+  <!-- max width -->
+<div class="container maxwidth" id="tryit">
+  <div class="selectors">
+    <!--upload image -->
+    <label id="uploadimage" for="pixlInput">Upload Image<input type="file" class="inputbtn" id="pixlInput"></label>
+    <!-- block size -->
+    <label for="blocksize" class="inputbtn">Block size<span id="blockvalue">7</span><input value="7" type="range" min="1" max="25" id="blocksize"></label>
+    <!-- greyscale -->
+    <label for="greyscale" class="inputbtn" >Greyscale<input type="checkbox" id="greyscale"></label>
+    <!-- palette -->
+    <label for="palette" class="inputbtn">palette<input type="checkbox"  id="palette"></label>
+    <!-- max height -->
+    <label for="maxheight" class="inputbtn">Max Height<input type="input"  id="maxheight" placeholder="in px"></label>
+    <!-- max width -->
+    <label for="maxwidth" class="inputbtn">Max Width<input type="input" id="maxwidth" placeholder="in px"></label
+  </div>
+  <div class="infoselects">
+   <!-- color palette example-->
+   <div class="colorpalette">
+    <div class="text"><button class="btn small" id="changepalette">Change palette</button></div>
+    <div class="icons" id="palettecolor">
+    
+    </div>
+   </div>
+   <div class="dothings">
+   <!-- download image -->
+   <Button id="downloadimage" class="btn small call">Download Image</Button>
+   </div>
+   
+  </div>
+ 
+ </div>
+ <canvas id="pixelitcanvas"></canvas>
+  </div>
+</section>
+ <section class="docs" id="docs">
+   <div class="wrap withmargins">
+  <h2>Documentation</h2>
+  <h3>Quick usage</h3>
+  <p>To use the quick default configuration you need an element from where to draw the image and canvas element with the id pixelitcanvas. Then load the pixelit.js script and apply it on an image.</p>
+  <pre>
+&lt;img src="assets/sky.jpg"  id="pixelitimg" alt=""&gt;
+&lt;canvas id="pixelitcanvas"&gt;&lt;/canvas&gt;
+&lt;script src="dist/pixelit.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  //create object
+  const px = new pixelitcanvas();
+  px.draw().pixelate();
+&lt;/script</pre>
+
+  
+  <h3>Options</h3>
+  <p>You can pass some options when creating the instance (you can alter them later using the api methods).</p>
+  <pre>
+config = {
+  to : elem, defaults to document.getElementById("pixelitcanvas")
+  from : elem, defaults to document.getElementById("pixelitimg")
+  scale : int from 0-50, defaults to 8
+  palette : [[r,g,b]], defaults to a fixed palette
+  maxHeight: int, defaults to null
+  maxWidth: int, defaults to null
+}
+  </pre>
+
+
+  <h3>API</h3>
+  <p>You can chain all methods together, beware that the order they are applied can change the final result.</p> 
+  <p>Applying first the color palette and then the greyscale can give a slightlity different image.</p>
+
+<p class="api"><strong>.draw()</strong> draw to canvas from image source and resizes if max height or max width is reached</p>
+<p class="api"><strong>.hideFromImg()</strong> hides the from image element, is applied on object creation</p>
+<p class="api"><strong>.setDrawFrom(elem)</strong> elem to get the image to pixelate</p>
+<p class="api"><strong>.setDrawTo(elem)</strong> canvas elem to draw the image</p>
+<p class="api"><strong>.setFromImgSource(src)</strong> change the src from the image element</p>
+<p class="api"><strong>.setpalette(arr)</strong> sets the color palette to use, takes an array of rgb colors: [[int,int,int]], int from 0 to 255</p>
+<p class="api"><strong>.setMaxWidth(int)</strong> set canvas image maximum width, it can resize the output image, only used when .resizeImage() is applied</p>
+<p class="api"><strong>.setMaxHeight(int)</strong> set canvas image maximum height, it can resize the output image, max height overrides max width, only used when .resizeImage() is applied</p>
+<p class="api"><strong>.setScale(int)</strong> set pixelate scale [0...50]</p>
+<p class="api"><strong>.getpalette()</strong> returns array of current palette, can't be chained</p>
+<p class="api"><strong>.convertGrayscale()</strong> converts image to greyscale, apply only after .draw is called</p>
+<p class="api"><strong>.convertpalette()</strong> converts image with the defined color palette, apply only after .draw is called</p>
+<p class="api"><strong>.resizeImage()</strong> resizes the output image if bigger than the defined max Height or max Width</p>
+<p class="api"><strong>.pixelate()</strong> draws a pixelated version of the from image to the to canvas, , apply only after .draw is called</p>
+<p class="api"><strong>.saveImage()</strong> saves/downloads current image</p>
+
+  <h3>Known Problems/bugs</h3>
+  <p>Images with transparencies on the top left corner will make an image appear there, that can be fixed uncommenting the hack from the .pixelate function</p>
+  <p>Works fine with the other modes</p>
+  </div>
+  
+</section>
+ <section class="links"><div class="wrap">
+   <a href="" class="btn call github"  rel="nofollow noopener" target="_blank" title="github repository">github</a>
+   <a href="https://twitter.com/heyzeto" class="btn call twitter" rel="nofollow noopener" title="twitter" target="_blank">twitter</a>
+  </div></section>
+  <img src="assets/sky.jpg"  id="pixelitimg" alt="">
+  <!--<img style="visibility: hidden;" id="pixlimg" alt="">-->
+ 
+
+  <script src="../dist/pixelitmin.js"></script>
+  <script src="/assets/mainmin.js"></script>
+
+ </body>
+ 
+</html>
