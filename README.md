@@ -30,7 +30,7 @@ To use the quick default configuration you need an element from where to draw th
     <script src="pixelit.js"></script>
     <script>
       //create object
-      const px = new pixelitcanvas();
+      const px = new pixelit();
       px.draw().pixelate();
     </script>
 ```
@@ -51,7 +51,7 @@ You can use this option when creating the instance of pixel it
       maxWidth: int, 
       //defaults to null
     }
-    const px = new pixelitcanvas(config);
+    const px = new pixelit(config);
 ```
 ## Api
 
@@ -75,6 +75,7 @@ You can use this option when creating the instance of pixel it
 |.saveImage()| saves/downloads current image|
 
 Working example:
+
 ```html
     <img  src="assets/sky.jpg"  id="pixelitimg"  alt="">
     <canvas  id="pixelitcanvas"></canvas>
