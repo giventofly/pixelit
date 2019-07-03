@@ -6,8 +6,10 @@ See [Pixel it](https://pages.github.com/#tryit) in action.
 
 On /dist you can find the files you need
 
-pixelit.js | javascript es6 file
-pixelitmin.js | javascript minified and babeljs.io parsed for es5
+| file | description  |
+|--|--|
+|  * [pixelit.js](https://raw.githubusercontent.com/giventofly/pixelit/master/dist/pixelit.js) | javascript es6 file |
+| [pixelitmin.js](https://raw.githubusercontent.com/giventofly/pixelit/master/dist/pixelitmin.js) | javascript minified and babeljs.io parsed for es5 |
 
 
 ## Examples
@@ -16,13 +18,13 @@ Original image and after Pixel it did some work on it.
 
 No filter applied and color palette used. 
 
-![default use](https://imgs.xkcd.com/comics/ken_burns_theory.png)
-![4 color palette used](https://imgs.xkcd.com/comics/ken_burns_theory.png)
+![default use](https://giventofly.github.io/pixelit/assets/px-normal.jpg)
+![4 color palette used](https://giventofly.github.io/pixelit/assets/px-palette4c.jpg)
 
 ## Documentation
 
 To use the quick default configuration you need an element from where to draw the image and canvas element with the id pixelitcanvas. Then load the pixelit.js script and apply it on an image.
-
+```html
     <img src="assets/sky.jpg"  id="pixelitimg" alt="">
     <canvas id="pixelitcanvas"></canvas>
     <script src="dist/pixelit.js"></script>
@@ -31,6 +33,7 @@ To use the quick default configuration you need an element from where to draw th
       const px = new pixelitcanvas();
       px.draw().pixelate();
     </script>
+```
 
 You can use this option when creating the instance of pixel it
 
