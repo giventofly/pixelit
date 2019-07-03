@@ -115,14 +115,15 @@ document.getElementById("pixlInput").onchange = function(e) {
   //function to apply effects
   const pixelit = ()=>{
     document.querySelector('.loader').classList.toggle('active');
+    setTimeout(() => {
+      document.querySelector('.loader').classList.toggle('active');
+    }, 500);
     px.setScale(blocksize.value).setPalette(paletteList[currentPalette]).draw().pixelate();
     greyscale.checked ? px.convertGrayscale() : null;
     palette.checked ?  px.convertPalette() : null;
     maxheight.value ? px.setMaxHeight(maxheight.value).resizeImage()  : null;
     maxwidth.value ? px.setMaxWidth(maxwidth.value).resizeImage() : null;
-    setTimeout(() => {
-      document.querySelector('.loader').classList.toggle('active');
-    }, 250);
+   
     
   }
 

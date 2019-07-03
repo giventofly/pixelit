@@ -29,14 +29,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var pixelit = function pixelit() {
     document.querySelector('.loader').classList.toggle('active');
+    setTimeout(function () {
+      document.querySelector('.loader').classList.toggle('active');
+    }, 500);
     px.setScale(blocksize.value).setPalette(paletteList[currentPalette]).draw().pixelate();
     greyscale.checked ? px.convertGrayscale() : null;
     palette.checked ? px.convertPalette() : null;
     maxheight.value ? px.setMaxHeight(maxheight.value).resizeImage() : null;
     maxwidth.value ? px.setMaxWidth(maxwidth.value).resizeImage() : null;
-    setTimeout(function () {
-      document.querySelector('.loader').classList.toggle('active');
-    }, 250);
+
   };
 
   var makePaletteGradient = function makePaletteGradient() {
