@@ -128,7 +128,7 @@ const makePaletteGradient = ()=>{
     let pdivs = "";
     //create palette of colors
     paletteList[currentPalette].forEach(elem=>{
-      pdivs += `<div style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
+      pdivs += `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
     });
     document.querySelector('#palettecolor').innerHTML = pdivs;
   }
