@@ -37,7 +37,7 @@ To use the quick default configuration you need an element from where to draw th
 
 You can use this option when creating the instance of pixel it
 ```javascript
-    config = {
+    const config = {
       to : elem,
       //defaults to document.getElementById("pixelitcanvas")
       from : elem, 
@@ -51,6 +51,7 @@ You can use this option when creating the instance of pixel it
       maxWidth: int, 
       //defaults to null
     }
+    const px = new pixelitcanvas(config);
 ```
 ## Api
 
