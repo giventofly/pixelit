@@ -226,15 +226,18 @@ flex-wrap: wrap;
    display:flex;
    justify-content:flex-start;
    flex-wrap: wrap;
-   .colorblock {
-    margin-right:5px;
-    margin-bottom: 5px;
-    height:25px;
-    width:25px;
-    border: solid 2px white;
-   }
+
   }
  }
+
+ .colorblock {
+  margin-right:5px;
+  margin-bottom: 5px;
+  height:25px;
+  width:25px;
+  border: solid 2px white;
+ }
+ 
  .container {
    canvas {
      margin:15px auto;

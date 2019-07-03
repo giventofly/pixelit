@@ -220,7 +220,7 @@ header .actions {
       flex-wrap: wrap;
 }
 
-.colorpallete .icons .colorblock {
+.colorblock {
   margin-right: 5px;
   margin-bottom: 5px;
   height: 25px;
