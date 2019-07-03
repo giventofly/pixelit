@@ -28,11 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   var pixelit = function pixelit() {
+    document.querySelector('.loader').classList.toggle('active');
     px.setScale(blocksize.value).setPalette(paletteList[currentPalette]).draw().pixelate();
     greyscale.checked ? px.convertGrayscale() : null;
     palette.checked ? px.convertPalette() : null;
     maxheight.value ? px.setMaxHeight(maxheight.value).resizeImage() : null;
     maxwidth.value ? px.setMaxWidth(maxwidth.value).resizeImage() : null;
+    setTimeout(function () {
+      document.querySelector('.loader').classList.toggle('active');
+    }, 250);
   };
 
   var makePaletteGradient = function makePaletteGradient() {
@@ -42,10 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('#palettecolor').innerHTML = '';
     paletteList[currentPalette].forEach(function (elem) {
       var div = document.createElement('div');
-      div.innerHTML = "<div class=\"colorblock\" style=\"background-color: rgba(".concat(elem[0], ",").concat(elem[1], ",").concat(elem[2], ",1)\"></div>");
+      div.classList = 'colorblock';
+      div.style.backgroundColor = "rgba(".concat(elem[0], ",").concat(elem[1], ",").concat(elem[2], ",1)"); //div.innerHTML = `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
+
       document.querySelector('#palettecolor').appendChild(div); //pdivs += `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
-    });
-    document.querySelector('#palettecolor').innerHTML = pdivs;
+    }); //document.querySelector('#palettecolor').innerHTML = pdivs;
   };
 
   makePaletteGradient(); //block size
