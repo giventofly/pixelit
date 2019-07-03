@@ -1,6 +1,6 @@
-# Pixel it
+# Pixel It
 Javascript library to create pixel art from an image.
-See [Pixel it](https://giventofly.github.io/pixelit#tryit) in action.
+See [Pixel It](https://giventofly.github.io/pixelit#tryit) in action.
 
 ## Files
 
@@ -14,7 +14,7 @@ On /dist you can find the files you need
 
 ## Examples
 
-Original image and after Pixel it did some work on it.
+Original image and after Pixel It did some work on it.
 
 No filter applied and color palette used. 
 
@@ -35,7 +35,7 @@ To use the quick default configuration you need an element from where to draw th
     </script>
 ```
 
-You can use this option when creating the instance of pixel it
+You can use this option when creating the instance of Pixel It
 ```javascript
     const config = {
       to : elem,
