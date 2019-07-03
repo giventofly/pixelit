@@ -8,7 +8,7 @@ On /dist you can find the files you need
 
 | file | description  |
 |--|--|
-|  * [pixelit.js](https://raw.githubusercontent.com/giventofly/pixelit/master/dist/pixelit.js) | javascript es6 file |
+| [pixelit.js](https://raw.githubusercontent.com/giventofly/pixelit/master/dist/pixelit.js) | javascript es6 file |
 | [pixelitmin.js](https://raw.githubusercontent.com/giventofly/pixelit/master/dist/pixelitmin.js) | javascript minified and babeljs.io parsed for es5 |
 
 
@@ -25,9 +25,9 @@ No filter applied and color palette used.
 
 To use the quick default configuration you need an element from where to draw the image and canvas element with the id pixelitcanvas. Then load the pixelit.js script and apply it on an image.
 ```html
-    <img src="assets/sky.jpg"  id="pixelitimg" alt="">
+    <img src="sky.jpg"  id="pixelitimg" alt="">
     <canvas id="pixelitcanvas"></canvas>
-    <script src="dist/pixelit.js"></script>
+    <script src="pixelit.js"></script>
     <script>
       //create object
       const px = new pixelitcanvas();
@@ -36,7 +36,7 @@ To use the quick default configuration you need an element from where to draw th
 ```
 
 You can use this option when creating the instance of pixel it
-
+```javascript
     config = {
       to : elem,
       //defaults to document.getElementById("pixelitcanvas")
@@ -51,7 +51,7 @@ You can use this option when creating the instance of pixel it
       maxWidth: int, 
       //defaults to null
     }
-
+```
 ## Api
 
 
@@ -74,7 +74,7 @@ You can use this option when creating the instance of pixel it
 |.saveImage()| saves/downloads current image|
 
 Working example:
-
+```html
     <img  src="assets/sky.jpg"  id="pixelitimg"  alt="">
     <canvas  id="pixelitcanvas"></canvas>
     <script>
@@ -85,3 +85,4 @@ Working example:
     "palette": mypalette});
     px.draw().pixelate().convertPalette();
     </script>
+```
