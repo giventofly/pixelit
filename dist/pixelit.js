@@ -10,7 +10,7 @@ class pixelit {
     //target for canvas
     this.drawto = config.to || document.getElementById("pixelitcanvas");
     //origin of uploaded image/src img
-    this.drawfrom = config.from || document.getElementById("pixelitcanvas");;
+    this.drawfrom = config.from || document.getElementById("pixelitimg");
     //hide image element
     this.hideFromImg();
     //range between 0 to 100
