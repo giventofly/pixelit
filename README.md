@@ -44,7 +44,7 @@ You can use this option when creating the instance of Pixel It
       //defaults to document.getElementById("pixelitimg")
       scale : int 
       //from 0-50, defaults to 8
-      pallete : [[r,g,b]], 
+      palette : [[r,g,b]], 
       //defaults to a fixed pallete
       maxHeight: int, 
       //defaults to null
@@ -63,7 +63,7 @@ You can use this option when creating the instance of Pixel It
 |.setDrawFrom(elem)| elem to get the image to pixelate|
 |.setDrawTo(elem)| canvas elem to draw the image|
 |.setFromImgSource(src)| change the src from the image element|
-|.setpalette(arr)| sets the color palette to use, takes an array of rgb colors: [[int,int,int]], int from 0 to 255|
+|.setPalette(arr)| sets the color palette to use, takes an array of rgb colors: [[int,int,int]], int from 0 to 255|
 |.setMaxWidth(int)| set canvas image maximum width, it can resize the output image, only used when .resizeImage() is applied|
 |.setMaxHeight(int)| set canvas image maximum height, it can resize the output image, max height overrides max width, only used when .resizeImage() is applied|
 |.setScale(int)| set pixelate scale [0...50]|
