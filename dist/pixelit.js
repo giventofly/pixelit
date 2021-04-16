@@ -3,10 +3,8 @@
  * @author José Moreira @ <https://github.com/giventofly/pixelit>
  **/
 
-
 class pixelit {
-
-  constructor(config={}) {
+  constructor(config = {}) {
     //target for canvas
     this.drawto = config.to || document.getElementById("pixelitcanvas");
     //origin of uploaded image/src img
@@ -14,31 +12,32 @@ class pixelit {
     //hide image element
     this.hideFromImg();
     //range between 0 to 100
-    this.scale = config.scale && config.scale > 0 && config.scale <= 50 ? config.scale * 0.01 : 8 * 0.01;
+    this.scale =
+      config.scale && config.scale > 0 && config.scale <= 50
+        ? config.scale * 0.01
+        : 8 * 0.01;
     this.palette = config.palette || [
-      [140,143,174],
-      [88,69,99],
-      [62,33,55],
-      [154,99,72],
-      [215,155,125],
-      [245,237,186],
-      [192,199,65],
-      [100,125,52],
-      [228,148,58],
-      [157,48,59],
-      [210,100,113],
-      [112,55,127],
-      [126,196,193],
-      [52,133,157],
-      [23,67,75],
-      [31,14,28]
+      [140, 143, 174],
+      [88, 69, 99],
+      [62, 33, 55],
+      [154, 99, 72],
+      [215, 155, 125],
+      [245, 237, 186],
+      [192, 199, 65],
+      [100, 125, 52],
+      [228, 148, 58],
+      [157, 48, 59],
+      [210, 100, 113],
+      [112, 55, 127],
+      [126, 196, 193],
+      [52, 133, 157],
+      [23, 67, 75],
+      [31, 14, 28],
     ];
     this.maxHeight = config.maxHeight;
     this.maxWidth = config.maxWidth;
     this.ctx = this.drawto.getContext("2d");
   }
-
-
 
   /** hide from image */
   hideFromImg() {
@@ -115,9 +114,9 @@ class pixelit {
    * 
     returns {arr} of current palette
    */
-   getPalette(){
-     return this.palette;
-   }
+  getPalette() {
+    return this.palette;
+  }
 
   /**
    * color similarity between colors, lower is better
@@ -146,7 +145,7 @@ class pixelit {
   similarColor(actualColor) {
     let selectedColor = [];
     let currentSim = this.colorSim(actualColor, this.palette[0]);
-    this.palette.forEach(color => {
+    this.palette.forEach((color) => {
       if (this.colorSim(actualColor, color) <= currentSim) {
         selectedColor = color;
         currentSim = this.colorSim(actualColor, color);
@@ -162,22 +161,40 @@ class pixelit {
   pixelate() {
     this.drawto.width = this.drawfrom.width;
     this.drawto.height = this.drawfrom.height;
-    
+
     const scaledW = this.drawto.width * this.scale;
     const scaledH = this.drawto.height * this.scale;
 
     //var ctx = canvas.getContext("2d");
-    
+
     this.ctx.mozImageSmoothingEnabled = false;
     this.ctx.webkitImageSmoothingEnabled = false;
     this.ctx.imageSmoothingEnabled = false;
 
-    
-    this.ctx.drawImage(this.drawfrom, 0, 0, scaledW, scaledH);
-    this.ctx.drawImage(this.drawto, 0, 0, scaledW, scaledH, 0, 0, this.drawfrom.width, this.drawfrom.height);
+    //previous method, would failt for background transparent images
+    //this.ctx.drawImage(this.drawfrom, 0, 0, scaledW, scaledH);
 
-    //hack images with transparencies on top left corner
-    //this.ctx.clearRect(0, 0, scaledW*1.05, scaledH*1.05);
+    //make temporary canvas to make new scaled copy
+    const tempCanvas = document.createElement("canvas");
+    // get the context
+    const tempContext = tempCanvas.getContext("2d");
+    // draw the image into the canvas
+    tempContext.drawImage(this.drawfrom, 0, 0, scaledW, scaledH);
+    //draw to final canvas
+    this.ctx.drawImage(
+      tempCanvas,
+      0,
+      0,
+      scaledW,
+      scaledH,
+      0,
+      0,
+      this.drawfrom.width,
+      this.drawfrom.height
+    );
+    //remove temp element
+    tempCanvas.remove();
+
     return this;
   }
 
@@ -212,7 +229,11 @@ class pixelit {
       for (var x = 0; x < imgPixels.width; x++) {
         var i = y * 4 * imgPixels.width + x * 4;
         //var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
-        const finalcolor = this.similarColor([imgPixels.data[i], imgPixels.data[i + 1], imgPixels.data[i + 2]]);
+        const finalcolor = this.similarColor([
+          imgPixels.data[i],
+          imgPixels.data[i + 1],
+          imgPixels.data[i + 2],
+        ]);
         imgPixels.data[i] = finalcolor[0];
         imgPixels.data[i + 1] = finalcolor[1];
         imgPixels.data[i + 2] = finalcolor[2];
@@ -251,7 +272,17 @@ class pixelit {
 
     this.drawto.width = this.drawto.width * ratio;
     this.drawto.height = this.drawto.height * ratio;
-    this.ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, this.drawto.width, this.drawto.height);
+    this.ctx.drawImage(
+      canvasCopy,
+      0,
+      0,
+      canvasCopy.width,
+      canvasCopy.height,
+      0,
+      0,
+      this.drawto.width,
+      this.drawto.height
+    );
 
     return this;
   }
@@ -264,6 +295,7 @@ class pixelit {
     //draw image to canvas
     this.drawto.width = this.drawfrom.width;
     this.drawto.height = this.drawfrom.height;
+    //draw
     this.ctx.drawImage(this.drawfrom, 0, 0);
     //resize is always done
     this.resizeImage();
@@ -277,7 +309,9 @@ class pixelit {
   saveImage() {
     const link = document.createElement("a");
     link.download = "pxArt.png";
-    link.href = this.drawto.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    link.href = this.drawto
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     document.querySelector("body").appendChild(link);
     link.click();
     document.querySelector("body").removeChild(link);
