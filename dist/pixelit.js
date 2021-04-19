@@ -159,27 +159,36 @@ class pixelit {
    * Draws a pixelated version of an image in a given canvas
    */
   pixelate() {
-    this.drawto.width = this.drawfrom.width;
-    this.drawto.height = this.drawfrom.height;
+    this.drawto.width = this.drawfrom.naturalWidth;
+    this.drawto.height = this.drawfrom.naturalHeight;
 
-    const scaledW = this.drawto.width * this.scale;
-    const scaledH = this.drawto.height * this.scale;
-
-    //var ctx = canvas.getContext("2d");
-
-    this.ctx.mozImageSmoothingEnabled = false;
-    this.ctx.webkitImageSmoothingEnabled = false;
-    this.ctx.imageSmoothingEnabled = false;
-
-    //previous method, would failt for background transparent images
-    //this.ctx.drawImage(this.drawfrom, 0, 0, scaledW, scaledH);
+    let scaledW = this.drawto.width * this.scale;
+    let scaledH = this.drawto.height * this.scale;
 
     //make temporary canvas to make new scaled copy
     const tempCanvas = document.createElement("canvas");
+
+    //corner case of bigger images, increase the temporary canvas size to fit everything
+    if(this.drawto.width > 800 || this.drawto.width > 800 ){
+      //fix sclae to pixelate bigger images
+      this.scale *= 0.25;
+      scaledW = this.drawto.width * this.scale;
+      scaledH = this.drawto.height * this.scale;
+      //make it big enough to fit
+      tempCanvas.width = Math.max(scaledW, scaledH ) + 50;
+      tempCanvas.height = Math.max(scaledW, scaledH ) + 50;
+    }
     // get the context
     const tempContext = tempCanvas.getContext("2d");
     // draw the image into the canvas
     tempContext.drawImage(this.drawfrom, 0, 0, scaledW, scaledH);
+    document.body.appendChild(tempCanvas);
+
+    //configs to pixelate
+    this.ctx.mozImageSmoothingEnabled = false;
+    this.ctx.webkitImageSmoothingEnabled = false;
+    this.ctx.imageSmoothingEnabled = false;
+
     //draw to final canvas
     this.ctx.drawImage(
       tempCanvas,
@@ -189,8 +198,8 @@ class pixelit {
       scaledH,
       0,
       0,
-      this.drawfrom.width,
-      this.drawfrom.height
+      this.drawfrom.naturalWidth,
+      this.drawfrom.naturalHeight
     );
     //remove temp element
     tempCanvas.remove();
