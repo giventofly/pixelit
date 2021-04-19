@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".loader").classList.toggle("active");
     setTimeout(() => {
       document.querySelector(".loader").classList.toggle("active");
-    }, 1500);
+    }, 800);
     px
       .setScale(blocksize.value)
       .setPalette(paletteList[currentPalette])
