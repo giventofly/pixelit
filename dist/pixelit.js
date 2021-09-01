@@ -138,17 +138,17 @@ class pixelit {
   /**
    * given actualColor, check from the paletteColors the most aproximated color
    * @param {array} actualColor rgb color to compare [int,int,int]
-   * @param {array} paletteColors list of rgb colors to compare [[int,int,int]]
    * @returns {array} aproximated rgb color
    */
-
   similarColor(actualColor) {
     let selectedColor = [];
     let currentSim = this.colorSim(actualColor, this.palette[0]);
+    let nextColor;
     this.palette.forEach((color) => {
-      if (this.colorSim(actualColor, color) <= currentSim) {
+      nextColor = this.colorSim(actualColor, color);
+      if (nextColor <= currentSim) {
         selectedColor = color;
-        currentSim = this.colorSim(actualColor, color);
+        currentSim = nextColor;
       }
     });
     return selectedColor;
