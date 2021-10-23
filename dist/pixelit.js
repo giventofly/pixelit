@@ -169,8 +169,8 @@ class pixelit {
     const tempCanvas = document.createElement("canvas");
     
     // Set temp canvas width/height & hide (fixes higher scaled cutting off image bottom)
-    tempCanvas.width = this.drawTo.width
-    tempCanvas.height = this.drawTo.height
+    tempCanvas.width = this.drawto.width
+    tempCanvas.height = this.drawto.height
     tempCanvas.style.visibility = "hidden"
     tempCanvas.style.position = "fixed"
     tempCanvas.style.top = "0"
