@@ -177,7 +177,7 @@ class pixelit {
     tempCanvas.style.left = "0"
 
     //corner case of bigger images, increase the temporary canvas size to fit everything
-    if(this.drawto.width > 800 || this.drawto.width > 800 ){
+    if(this.drawto.width > 800 || this.drawto.height > 800 ){
       //fix sclae to pixelate bigger images
       this.scale *= 0.25;
       scaledW = this.drawto.width * this.scale;
