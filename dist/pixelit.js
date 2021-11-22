@@ -167,6 +167,14 @@ class pixelit {
 
     //make temporary canvas to make new scaled copy
     const tempCanvas = document.createElement("canvas");
+    
+    // Set temp canvas width/height & hide (fixes higher scaled cutting off image bottom)
+    tempCanvas.width = this.drawto.width
+    tempCanvas.height = this.drawto.height
+    tempCanvas.style.visibility = "hidden"
+    tempCanvas.style.position = "fixed"
+    tempCanvas.style.top = "0"
+    tempCanvas.style.left = "0"
 
     //corner case of bigger images, increase the temporary canvas size to fit everything
     if(this.drawto.width > 800 || this.drawto.width > 800 ){
