@@ -239,9 +239,7 @@ header {
     width: 25px;
     border: solid 2px white;
   }
-  
 }
-
 
 .container {
   canvas {
@@ -350,8 +348,8 @@ header {
 
 .loader {
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
   height: 100vh;
@@ -359,7 +357,7 @@ header {
   display: none;
   justify-content: center;
   align-items: center;
-  background-color: rgba($maincolor,0.4);
+  background-color: rgba($maincolor, 0.4);
   &.active {
     display: flex;
   }

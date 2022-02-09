@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify-es": "^3.0.0"
+  }
+}

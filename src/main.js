@@ -14,10 +14,28 @@ const paletteList = [
     [255, 236, 214],
   ],
   [
+    [43, 15, 84],
+    [171, 31, 101],
+    [255, 79, 105],
+    [255, 247, 248],
+    [255, 129, 66],
+    [255, 218, 69],
+    [51, 104, 220],
+    [73, 231, 236],
+  ],
+  [
     [48, 0, 48],
     [96, 40, 120],
     [248, 144, 32],
     [248, 240, 136],
+  ],
+  [
+    [239, 26, 26],
+    [172, 23, 23],
+    [243, 216, 216],
+    [177, 139, 139],
+    [53, 52, 65],
+    [27, 26, 29],
   ],
   [
     [26, 28, 44],
@@ -61,6 +79,15 @@ const paletteList = [
     [148, 91, 40],
   ],
   [
+    [171, 97, 135],
+    [235, 198, 134],
+    [216, 232, 230],
+    [101, 219, 115],
+    [112, 157, 207],
+    [90, 104, 125],
+    [33, 30, 51],
+  ],
+  [
     [140, 143, 174],
     [88, 69, 99],
     [62, 33, 55],
@@ -92,6 +119,12 @@ const paletteList = [
     [255, 217, 63],
     [181, 181, 181],
     [255, 255, 255],
+  ],
+  [
+    [49, 31, 95],
+    [22, 135, 167],
+    [31, 213, 188],
+    [237, 255, 177],
   ],
   [
     [21, 25, 26],
@@ -131,18 +164,16 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       document.querySelector(".loader").classList.toggle("active");
     }, 800);
-    px
-      .setScale(blocksize.value)
+    px.setScale(blocksize.value)
       .setPalette(paletteList[currentPalette])
       .draw()
       .pixelate();
-      
-      greyscale.checked ? px.convertGrayscale() : null;
-      palette.checked ? px.convertPalette() : null;
-      maxheight.value ? px.setMaxHeight(maxheight.value).resizeImage() : null;
-      maxwidth.value ? px.setMaxWidth(maxwidth.value).resizeImage() : null;
-  };
 
+    greyscale.checked ? px.convertGrayscale() : null;
+    palette.checked ? px.convertPalette() : null;
+    maxheight.value ? px.setMaxHeight(maxheight.value).resizeImage() : null;
+    maxwidth.value ? px.setMaxWidth(maxwidth.value).resizeImage() : null;
+  };
 
   const makePaletteGradient = () => {
     //create palette

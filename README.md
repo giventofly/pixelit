@@ -1,10 +1,23 @@
 # Pixel It
+
 Javascript library to create pixel art from an image.
 See [Pixel It](https://giventofly.github.io/pixelit#tryit) in action.
 
+### Index
+
+Current version 1.2.1
+
+* [Files](https://github.com/giventofly/pixelit#files)
+* [Examples](https://github.com/giventofly/pixelit#examples)
+* [Documentation](https://github.com/giventofly/pixelit#documentation)
+* [Api](https://github.com/giventofly/pixelit#api)
+* [Local development](https://github.com/giventofly/pixelit#local-development)
+* [Changelog](https://github.com/giventofly/pixelit#changelog)
+
+
 ## Files
 
-On /dist you can find the files you need
+On `/dist` you can find the files you need
 
 | file | description  |
 |--|--|
@@ -56,7 +69,6 @@ You can use this option when creating the instance of Pixel It
 ## Api
 
 
-
 |method |  |
 |--|--|
 |.draw()  | draw to canvas from image source and resizes if max height or max width is reached |.hideFromImg()| hides the from image element, is applied on object creation|
@@ -88,3 +100,16 @@ Working example:
     px.draw().pixelate().convertPalette();
     </script>
 ```
+## Local development
+
+Run `npm install` to install the needed files, edit javascript from `/src/` folder and run `gulp serve` to make a direct copy and a minified and transpiled files into `/dist` and `/docs/js` respectively.
+
+## Changelog
+
+#### 2022-02-10
+
+* Github page added changelog
+* Github page added local development information
+* Added gulp to minifiy and transpile without the need for aditional tools
+* Fix border appearing on bigger images
+* Added new palettes on live page
