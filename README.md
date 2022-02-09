@@ -5,8 +5,6 @@ See [Pixel It](https://giventofly.github.io/pixelit#tryit) in action.
 
 ### Index
 
-Current version 1.2.1
-
 * [Files](https://github.com/giventofly/pixelit#files)
 * [Examples](https://github.com/giventofly/pixelit#examples)
 * [Documentation](https://github.com/giventofly/pixelit#documentation)
