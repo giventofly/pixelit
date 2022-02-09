@@ -15,6 +15,9 @@ gulp.task("servejs", function () {
     .pipe(uglify())
     .pipe(rename("main.min.js"))
     .pipe(gulp.dest("docs/js/"));
+  gulp
+    .src("dist/pixelit.min.js")
+    .pipe(gulp.dest("docs/js/"));
   return gulp
     .src("src/pixelit.js")
     .pipe(babel({ presets: ["@babel/env"] }))
