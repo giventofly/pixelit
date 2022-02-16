@@ -4,6 +4,23 @@ const px = new pixelit({ from: document.getElementById("pixelitimg") });
 //stuff for webpage functionality
 const paletteList = [
   [
+    [7, 5, 5],
+    [33, 25, 25],
+    [82, 58, 42],
+    [138, 107, 62],
+    [193, 156, 77],
+    [234, 219, 116],
+    [160, 179, 53],
+    [83, 124, 68],
+    [66, 60, 86],
+    [89, 111, 175],
+    [107, 185, 182],
+    [251, 250, 249],
+    [184, 170, 176],
+    [121, 112, 126],
+    [148, 91, 40],
+  ],
+  [
     [13, 43, 69],
     [32, 60, 86],
     [84, 78, 104],
@@ -61,23 +78,7 @@ const paletteList = [
     [237, 180, 161],
     [169, 104, 104],
   ],
-  [
-    [7, 5, 5],
-    [33, 25, 25],
-    [82, 58, 42],
-    [138, 107, 62],
-    [193, 156, 77],
-    [234, 219, 116],
-    [160, 179, 53],
-    [83, 124, 68],
-    [66, 60, 86],
-    [89, 111, 175],
-    [107, 185, 182],
-    [251, 250, 249],
-    [184, 170, 176],
-    [121, 112, 126],
-    [148, 91, 40],
-  ],
+
   [
     [171, 97, 135],
     [235, 198, 134],
@@ -137,8 +138,8 @@ const paletteList = [
     [255, 245, 247],
   ],
 ];
-let currentPalette = 3;
-let maxPalette = paletteList.length;
+let currentPalette = 0;
+//let maxPalette = paletteList.length;
 
 document.addEventListener("DOMContentLoaded", function () {
   //load image to canvas
@@ -180,18 +181,36 @@ document.addEventListener("DOMContentLoaded", function () {
     let pdivs = "";
     //create palette of colors
     document.querySelector("#palettecolor").innerHTML = "";
-    paletteList[currentPalette].forEach((elem) => {
-      let div = document.createElement("div");
-      div.classList = "colorblock";
-      div.style.backgroundColor = `rgba(${elem[0]},${elem[1]},${elem[2]},1)`;
-      //div.innerHTML = `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
-      document.querySelector("#palettecolor").appendChild(div);
-      //pdivs += `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
+    paletteList.forEach((palette, i) => {
+      const option = document.createElement("option");
+      option.value = i;
+      palette.forEach((elem) => {
+        let div = document.createElement("div");
+        div.classList = "colorblock";
+        div.style.backgroundColor = `rgba(${elem[0]},${elem[1]},${elem[2]},1)`;
+        //div.innerHTML = `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
+        option.appendChild(div);
+        //pdivs += `<div class="colorblock" style="background-color: rgba(${elem[0]},${elem[1]},${elem[2]},1)"></div>`;
+      });
+      document.getElementById("paletteselector").appendChild(option);
     });
+
     //document.querySelector('#palettecolor').innerHTML = pdivs;
   };
 
   makePaletteGradient();
+  //special select
+  new SlimSelect({
+    hideSelectedOption: true,
+    showSearch: false,
+    select: "#paletteselector",
+    onChange: (info) => {
+      currentPalette = info.value;
+      palette.checked = true;
+      pixelit();
+      //console.log(info)
+    },
+  });
 
   //block size
   const blocksize = document.querySelector("#blocksize");
@@ -211,7 +230,8 @@ document.addEventListener("DOMContentLoaded", function () {
   //maxwidth
   const maxwidth = document.querySelector("#maxwidth");
   maxwidth.addEventListener("change", pixelit);
-  //change palette
+  //change palette deprecated
+  /*
   const changePalette = document.querySelector("#changepalette");
   changePalette.addEventListener("click", function (e) {
     currentPalette > 0 ? currentPalette-- : (currentPalette = maxPalette - 1);
@@ -219,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
     palette.checked = true;
     pixelit();
   });
-
+  */
   //downloadimage options
   const downloadimage = document.querySelector("#downloadimage");
 

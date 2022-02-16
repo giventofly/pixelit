@@ -189,7 +189,8 @@ header .actions {
 }
 
 .colorpalette {
-  margin-top: 15px;
+  margin-top: 18px;
+  margin-bottom: 18px;
   text-transform: uppercase;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -218,6 +219,12 @@ header .actions {
           justify-content: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  width: 100%;
+}
+
+.colorpalette .text button {
+  margin-right: 16px;
+  margin-bottom: 0px;
 }
 
 .colorpalette .icons {
@@ -235,11 +242,42 @@ header .actions {
 }
 
 .colorpalette .colorblock {
-  margin-right: 5px;
-  margin-bottom: 5px;
+  margin-right: 2px;
+  margin-bottom: 0px;
+  margin-top: 6px;
   height: 25px;
-  width: 25px;
-  border: solid 2px white;
+  width: 25px !important;
+  border: solid 0px white;
+}
+
+.colorpalette .ss-main {
+  width: calc(100%);
+  margin-top: 8px;
+  max-width: 480px;
+}
+
+.colorpalette .ss-main .ss-single-selected {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: calc(100%);
+  background-color: #ececec;
+}
+
+.colorpalette .ss-main .ss-option {
+  margin-bottom: 6px;
+}
+
+.colorpalette .ss-main .ss-option:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.colorpalette .ss-content {
+  width: 100%;
+}
+
+.colorpalette .ss-content .ss-list .ss-option {
+  padding: 0px 10px;
 }
 
 .container canvas {

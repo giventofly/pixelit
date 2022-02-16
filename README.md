@@ -104,6 +104,11 @@ Run `npm install` to install the needed files, edit javascript from `/src/` fold
 
 ## Changelog
 
+
+#### 2022-02-16
+
+* Github page added scroll down selector for palette change
+
 #### 2022-02-10
 
 * Github page added changelog

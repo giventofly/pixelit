@@ -6,6 +6,7 @@
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
  
  <link rel="stylesheet" href="assets/style.min.css">
+ <link rel="stylesheet" href="assets/slim.select.css">
  <title>Pixel It - Create pixel art from an image</title>
 </head>
 <body>
@@ -67,7 +68,10 @@
   <div class="infoselects">
    <!-- color palette example-->
    <div class="colorpalette">
-    <div class="text"><button class="btn small" id="changepalette">Change palette</button></div>
+    <div class="text">
+      <button class="btn small" id="changepalette">Select palette</button>
+      <select name="paletteselector" id="paletteselector"></select>
+    </div>
     <div class="icons" id="palettecolor">
     
     </div>
@@ -144,6 +148,7 @@ config = {
   <img src="assets/sky.jpg"  id="pixelitimg" alt="">
   <!--<img style="visibility: hidden;" id="pixlimg" alt="">  -->
   <script src="js/pixelit.min.js"></script>
+  <script src="js/slim.select.min.js"></script>
   <script src="js/main.min.js"></script>
   <!-- loader-->
   <div class="loader">

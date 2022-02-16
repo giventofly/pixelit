@@ -211,7 +211,8 @@ header {
   width: 100%;
 }
 .colorpalette {
-  margin-top: 15px;
+  margin-top: 18px;
+  margin-bottom: 18px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -224,6 +225,11 @@ header {
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
+    width: 100%;
+    button {
+      margin-right: 16px;
+      margin-bottom: 0px;
+    }
   }
   .icons {
     //margin-top:10px;
@@ -233,11 +239,34 @@ header {
     flex-wrap: wrap;
   }
   .colorblock {
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin-right: 2px;
+    margin-bottom: 0px;
+    margin-top: 6px;
     height: 25px;
-    width: 25px;
-    border: solid 2px white;
+    width: 25px !important;
+    border: solid 0px white;
+  }
+  .ss-main {
+    width: calc(100%);
+    margin-top: 8px;
+    max-width: 480px;
+    .ss-single-selected {
+      display: inline-flex;
+      width: calc(100%);
+      background-color: #ececec;
+    }
+    .ss-option {
+      margin-bottom: 6px;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1) !important;
+      }
+    }
+  }
+  .ss-content {
+    width: 100%;
+  }
+  .ss-content .ss-list .ss-option {
+    padding: 0px 10px;
   }
 }
 
