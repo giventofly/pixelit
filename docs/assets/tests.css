@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|VT323|Megrim|Rajdhani");
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#mockfrom,
+#mockto {
+  display: none;
+}
+
+h1,
+h2 {
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  margin: 35px auto;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+p {
+  line-height: 1.4;
+  margin: 10px auto;
+  max-width: 700px;
+  width: 100%;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-size: 2.1rem;
+}
+
+body {
+  color: #fdfdfd;
+  font-family: "Open Sans", sans-serif;
+  overflow-x: hidden;
+  padding: 12px;
+  color: #21383a;
+  background-color: #e4e4e4;
+}
+
+body a {
+  color: #21383a;
+}
+
+#content {
+  width: 100%;
+  padding: 25px 0px;
+  margin: 0 auto;
+}
+
+#content p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#content img,
+#content canvas {
+  max-width: calc(50% - 24px);
+  border: solid 2px #fdfdfd;
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 100%;
+  display: inline-block;
+}
+
+#content canvas {
+  margin-left: 24px;
+}
+
+#content .block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 50px;
+}
+
+#content .block .inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.maxwidth {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+/*# sourceMappingURL=tests.css.map */

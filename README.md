@@ -102,8 +102,14 @@ Working example:
 
 Run `npm install` to install the needed files, edit javascript from `/src/` folder and run `gulp serve` to make a direct copy and a minified and transpiled files into `/dist` and `/docs/js` respectively.
 
+You have inside the docs page a [tests](https://giventofly.github.io/pixelit/tests.html) page to check changes to different image sizes.
+
 ## Changelog
 
+#### 2022-03-05
+
+* Added a page with [tests](https://giventofly.github.io/pixelit/tests.html)
+* Fixed image cut for smaller images and better border removal for bigger images
 
 #### 2022-02-16
 

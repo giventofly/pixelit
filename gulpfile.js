@@ -6,7 +6,7 @@ const rename = require("gulp-rename");
 
 gulp.task("servejs", function () {
   //*** direct copy
-  gulp.src("src/main.js").pipe(gulp.dest("docs/js/"));
+  gulp.src(["src/main.js","src/tests.js"]).pipe(gulp.dest("docs/js/"));
   gulp.src("src/pixelit.js").pipe(gulp.dest("dist/"));
   //*** minify and transpile
   gulp

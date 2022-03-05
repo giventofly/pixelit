@@ -199,7 +199,6 @@ class pixelit {
   pixelate() {
     this.drawto.width = this.drawfrom.naturalWidth;
     this.drawto.height = this.drawfrom.naturalHeight;
-
     let scaledW = this.drawto.width * this.scale;
     let scaledH = this.drawto.height * this.scale;
 
@@ -215,9 +214,9 @@ class pixelit {
     tempCanvas.style.left = "0";
 
     //corner case of bigger images, increase the temporary canvas size to fit everything
-    if (this.drawto.width > 800 || this.drawto.height > 800) {
+    if (this.drawto.width > 900 || this.drawto.height > 900) {
       //fix sclae to pixelate bigger images
-      this.scale *= 0.25;
+      this.scale *= 0.5;
       scaledW = this.drawto.width * this.scale;
       scaledH = this.drawto.height * this.scale;
       //make it big enough to fit
@@ -229,12 +228,34 @@ class pixelit {
     // draw the image into the canvas
     tempContext.drawImage(this.drawfrom, 0, 0, scaledW, scaledH);
     document.body.appendChild(tempCanvas);
-
     //configs to pixelate
     this.ctx.mozImageSmoothingEnabled = false;
     this.ctx.webkitImageSmoothingEnabled = false;
     this.ctx.imageSmoothingEnabled = false;
 
+    //calculations to remove extra border
+    let finalWidth = this.drawfrom.naturalWidth;
+    if (this.drawfrom.naturalWidth > 300) {
+      finalWidth +=
+        this.drawfrom.naturalWidth > this.drawfrom.naturalHeight
+          ? parseInt(
+              this.drawfrom.naturalWidth / (this.drawfrom.naturalWidth * this.scale)
+            ) / 1.5
+          : parseInt(
+              this.drawfrom.naturalWidth / (this.drawfrom.naturalWidth * this.scale)
+            );
+    }
+    let finalHeight = this.drawfrom.naturalHeight;
+    if (this.drawfrom.naturalHeight > 300) {
+      finalHeight +=
+        this.drawfrom.naturalHeight > this.drawfrom.naturalWidth
+          ? parseInt(
+              this.drawfrom.naturalHeight / (this.drawfrom.naturalHeight * this.scale)
+            ) / 1.5
+          : parseInt(
+              this.drawfrom.naturalHeight / (this.drawfrom.naturalHeight * this.scale)
+            );
+    }
     //draw to final canvas
     //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
     this.ctx.drawImage(
@@ -245,8 +266,8 @@ class pixelit {
       scaledH,
       0,
       0,
-      this.drawfrom.naturalWidth + Math.max(24, 25 * this.scale),
-      this.drawfrom.naturalHeight + Math.max(24, 25 * this.scale)
+      finalWidth, //+ Math.max(24, 25 * this.scale),
+      finalHeight //+ Math.max(24, 25 * this.scale)
     );
     //remove temp element
     tempCanvas.remove();

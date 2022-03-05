@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|VT323|Megrim|Rajdhani");
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  //font-family: "Raleway", sans-serif;
+  //font-family: "Montserrat", sans-serif;
+}
+
+//Media queries
+@mixin mq($point) {
+  $xs: "(max-width : 0px)";
+  $sm: "(max-width : 550px)";
+  $md: "(max-width : 1050px)";
+  $lg: "(min-width : 1350px)";
+  $vl: "(max-width : #{$point}px)";
+
+  @if $point==xs {
+    @media #{$xs} {
+      @content;
+    }
+  } @else if $point==sm {
+    @media #{$sm} {
+      @content;
+    }
+  } @else if $point==md {
+    @media #{$md} {
+      @content;
+    }
+  } @else if $point==lg {
+    @media #{$lg} {
+      @content;
+    }
+  } @else {
+    @media #{$vl} {
+      @content;
+    }
+  }
+}
+
+$maxwidth: 1000px;
+$secondarycolor: darken(#f5ca18, 10%);
+$callcolor: #c1563d;
+$maincolor: #21383a;
+$white: #fdfdfd;
+$black: #0c0c0c;
+
+$fontheader: "VT323", monospace;
+$fontheader: "Megrim", cursive;
+$fontheader: "Rajdhani", sans-serif;
+$fontheader: "Open Sans", sans-serif;
+$font: "Open Sans", sans-serif;
+
+#mockfrom,
+#mockto {
+  display: none;
+}
+h1,
+h2 {
+  font-family: $fontheader;
+  text-align: center;
+  margin: 35px auto;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+p {
+  line-height: 1.4;
+  margin: 10px auto;
+  max-width: 700px;
+  width: 100%;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-size: 2.1rem;
+}
+
+body {
+  color: $white;
+  font-family: $font;
+  overflow-x: hidden;
+  padding: 12px;
+  color: $maincolor;
+  background-color: darken($white, 10%);
+  a {
+    color: $maincolor;
+  }
+}
+
+#content {
+  //max-width: $maxwidth;
+  width: 100%;
+  padding: 25px 0px;
+  margin: 0 auto;
+  p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  img,
+  canvas {
+    //margin: 0 auto;
+    //position: relative;
+    //left: 50%;
+    //transform: translateX(-50%);
+    max-width: calc(50% - 24px);
+    border: solid 2px $white;
+    object-fit: contain;
+    width: 100%;
+    display: inline-block;
+  }
+  canvas {
+    margin-left: 24px;
+  }
+  .block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    .inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.maxwidth {
+  max-width: $maxwidth;
+  margin: 0 auto;
+}
