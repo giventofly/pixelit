@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
  
- <link rel="stylesheet" href="assets/style.min.css">
+ <link rel="stylesheet" href="assets/style.min.css?v1">
  <link rel="stylesheet" href="assets/slim.select.css">
  <title>Pixel It - Create pixel art from an image</title>
 </head>
@@ -75,6 +75,20 @@
     <div class="icons" id="palettecolor">
     
     </div>
+   </div>
+   <!-- custom palette -->
+   <div class="infoselects">
+    <h3>Custom palette</h3>
+    <p>Click on the color to change it</p>
+    <div class="custompalette" id="custompalette">
+      <input type="color" name="customcolor" id="customcolor">
+      <button class="btn small" id="addcustomcolor">Add Color</button>
+    </div>
+    <div id="currentpallete" class="colorpalette"> </div>
+    <button class="btn small" id="savecustompalette">Save Palette</button>
+    <p>After clicking save you need to refresh to see the palette added</p>
+    <button class="btn small" id="clearcustompalettes">Clear Custom Palettes</button>
+    <p>Click clear to remove all of your custom palettes, this is irreversible. Refresh to see changes.</p>
    </div>
    <div class="dothings">
    <!-- download image -->
@@ -149,7 +163,7 @@ config = {
   <!--<img style="visibility: hidden;" id="pixlimg" alt="">  -->
   <script src="js/pixelit.min.js"></script>
   <script src="js/slim.select.min.js"></script>
-  <script src="js/main.min.js"></script>
+  <script src="js/main.min.js?v1"></script>
   <!-- loader-->
   <div class="loader">
     <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>

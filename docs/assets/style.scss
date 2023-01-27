@@ -209,6 +209,13 @@ header {
 }
 .infoselects {
   width: 100%;
+  p {
+    text-align: left;
+    margin-left: 0;
+  }
+  button.btn {
+    cursor: pointer;
+  }
 }
 .colorpalette {
   margin-top: 18px;
@@ -270,6 +277,20 @@ header {
   }
 }
 
+#custompalette {
+  margin: 12px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  input {
+    margin-right: 12px;
+  }
+}
+#currentpallete {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 .container {
   canvas {
     margin: 15px auto;

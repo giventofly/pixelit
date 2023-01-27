@@ -2,7 +2,7 @@
 const px = new pixelit({ from: document.getElementById("pixelitimg") });
 
 //stuff for webpage functionality
-const paletteList = [
+let paletteList = [
   [
     [7, 5, 5],
     [33, 25, 25],
@@ -141,6 +141,41 @@ const paletteList = [
 let currentPalette = 0;
 //let maxPalette = paletteList.length;
 
+
+//*** add palette to custom list
+const addPalette = (palette=[]) => {
+  let data = JSON.parse(localStorage.getItem("customPalettes"));
+  if (data == null) data = [];
+  data.push(palette);
+  localStorage.setItem("customPalettes", JSON.stringify(data));
+};
+
+//*** update from localstorage
+const pullFromLocalStorage = () => {
+  //*** cards
+  let data = JSON.parse(localStorage.getItem("customPalettes"));
+  if (data == null) data = [];
+  return data;
+};
+//*** convert rgb color to int array */
+const rgbToInt = (rgb) => {
+  let r = parseInt(rgb.substring(1, 3), 16);
+  let g = parseInt(rgb.substring(3, 5), 16);
+  let b = parseInt(rgb.substring(5, 7), 16);
+  return [r, g, b];
+};
+//*** remove duplicates from array */
+const removeDuplicates = (arr) => {
+  let unique_array = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (unique_array.indexOf(arr[i]) == -1) {
+      unique_array.push(arr[i]);
+    }
+  }
+return unique_array;
+};
+
+
 document.addEventListener("DOMContentLoaded", function () {
   //load image to canvas
   document.getElementById("pixlInput").onchange = function (e) {
@@ -159,6 +194,44 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   };
 
+  //add color to palette
+  const addColor = document.getElementById('addcustomcolor');
+  addColor.addEventListener('click', () => {
+    let color = document.getElementById('customcolor').value;
+    const colorSpan = document.createElement('span');
+    colorSpan.style.backgroundColor = color;
+    colorSpan.dataset.color = rgbToInt(color).join(',');
+    colorSpan.classList.add('colorblock');
+    //console.log(colorSpan);
+    document.getElementById('currentpallete').appendChild(colorSpan);
+  });
+  //save custom palette
+  const savePalette = document.getElementById('savecustompalette');
+  savePalette.addEventListener('click', () => {
+    let palette = [];
+    let colors = document.querySelectorAll('#currentpallete .colorblock');
+    colors.forEach((color) => {
+      palette.push(color.dataset.color);
+    });
+    //console.log(palette);
+    //remove duplicates and make array of string
+    palette = removeDuplicates(palette).map((color) => {
+      return color.split(',');
+    });
+    addPalette(palette);
+    //remove all children from element
+    const currentPalette = document.getElementById('currentpallete');
+    while (currentPalette.firstChild) {
+      currentPalette.removeChild(currentPalette.firstChild);
+    }
+  });
+  //clear custom palettes
+  const clearPalette = document.getElementById('clearcustompalettes');
+  clearPalette.addEventListener('click', () => {
+    localStorage.setItem("customPalettes", JSON.stringify([]));
+  });
+
+
   //function to apply effects
   const pixelit = () => {
     document.querySelector(".loader").classList.toggle("active");
@@ -176,11 +249,15 @@ document.addEventListener("DOMContentLoaded", function () {
     maxwidth.value ? px.setMaxWidth(maxwidth.value).resizeImage() : null;
   };
 
+
+
   const makePaletteGradient = () => {
     //create palette
     let pdivs = "";
     //create palette of colors
     document.querySelector("#palettecolor").innerHTML = "";
+    const customPallete = pullFromLocalStorage();
+    paletteList = [ ...paletteList,...customPallete];
     paletteList.forEach((palette, i) => {
       const option = document.createElement("option");
       option.value = i;

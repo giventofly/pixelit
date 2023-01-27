@@ -106,6 +106,10 @@ You have inside the docs page a [tests](https://giventofly.github.io/pixelit/tes
 
 ## Changelog
 
+#### 2023-01-28
+
+* Added a new option on the live page to add custom palettes
+
 #### 2022-03-05
 
 * Added a page with [tests](https://giventofly.github.io/pixelit/tests.html)

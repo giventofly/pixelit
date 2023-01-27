@@ -188,6 +188,15 @@ header .actions {
   width: 100%;
 }
 
+.infoselects p {
+  text-align: left;
+  margin-left: 0;
+}
+
+.infoselects button.btn {
+  cursor: pointer;
+}
+
 .colorpalette {
   margin-top: 18px;
   margin-bottom: 18px;
@@ -278,6 +287,35 @@ header .actions {
 
 .colorpalette .ss-content .ss-list .ss-option {
   padding: 0px 10px;
+}
+
+#custompalette {
+  margin: 12px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#custompalette input {
+  margin-right: 12px;
+}
+
+#currentpallete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .container canvas {
@@ -565,4 +603,3 @@ header .actions {
     opacity: 0;
   }
 }
-/*# sourceMappingURL=style.css.map */
