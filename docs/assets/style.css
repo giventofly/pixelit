@@ -603,3 +603,44 @@ header .actions {
     opacity: 0;
   }
 }
+
+.tip {
+  margin-top: 12px;
+}
+
+.tip p {
+  text-align: left;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: unset;
+  margin-left: 0;
+  font-size: 1rem;
+  line-height: 2;
+}
+
+.tip a {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.tip a img {
+  border: 0;
+  max-width: unset;
+  top: 50%;
+  -webkit-transform: unset;
+          transform: unset;
+  -webkit-transform: translateY(0.5rem);
+          transform: translateY(0.5rem);
+  left: unset;
+  margin: 0;
+  height: 2rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+}

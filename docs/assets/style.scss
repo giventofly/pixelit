@@ -491,3 +491,33 @@ header {
     opacity: 0;
   }
 }
+
+.tip {
+  margin-top: 12px;
+  p {
+    text-align: left;
+    //display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: unset;
+    margin-left: 0;
+    font-size: 1rem;
+    line-height: 2;
+  }
+  a {
+    display: inline-flex;
+    margin-left: 6px;
+    margin-right: 6px;
+    img {
+      border: 0;
+      max-width: unset;
+      top: 50%;
+      transform: unset;
+      transform: translateY(0.5rem);
+      left: unset;
+      margin: 0;
+      height: 2rem;
+      object-fit: contain;
+    }
+  }
+}
