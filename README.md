@@ -55,8 +55,8 @@ You can use this option when creating the instance of Pixel It
       //defaults to document.getElementById("pixelitimg")
       scale : int 
       //from 0-50, defaults to 8
-      palette : [[r,g,b]], 
-      //defaults to a fixed pallete
+      palette : [[r,g,b],[r,g,b]], 
+      //defaults to a fixed pallete (2 colors minimum to work properly)
       maxHeight: int, 
       //defaults to null
       maxWidth: int, 
@@ -79,7 +79,7 @@ You can use this option when creating the instance of Pixel It
 |.setScale(int)| set pixelate scale [0...50]|
 |.getpalette()| returns array of current palette, can't be chained|
 |.convertGrayscale()| converts image to greyscale, apply only after .draw is called|
-|.convertpalette()| converts image with the defined color palette, apply only after .draw is called|
+|.convertPalette()| converts image with the defined color palette, apply only after .draw is called (needs to have 2 colors minimum)|
 |.resizeImage()| resizes the output image if bigger than the defined max Height or max Width|
 |.pixelate()| draws a pixelated version of the from image to the to canvas, , apply only after .draw is called|
 |.saveImage()| saves/downloads current image|
@@ -105,6 +105,11 @@ Run `npm install` to install the needed files, edit javascript from `/src/` fold
 You have inside the docs page a [tests](https://giventofly.github.io/pixelit/tests.html) page to check changes to different image sizes.
 
 ## Changelog
+
+### 2025-5-21
+
+* Small typo in documentation
+* Clarification on the minimum of colors for a palette
 
 ###  2023-02-25
 
