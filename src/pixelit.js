@@ -11,7 +11,7 @@ class pixelit {
     this.drawfrom = config.from || document.getElementById("pixelitimg");
     //hide image element
     this.hideFromImg();
-    //range between 0 to 100
+    //range between 0 to 50 (input 0..50 -> 0..0.5)
     this.scale =
       config.scale && config.scale > 0 && config.scale <= 50
         ? config.scale * 0.01
@@ -43,6 +43,7 @@ class pixelit {
 
   /** hide from image */
   hideFromImg() {
+    if (!this.drawfrom) return this;
     this.drawfrom.style.visibility = "hidden";
     this.drawfrom.style.position = "fixed";
     this.drawfrom.style.top = 0;
@@ -54,7 +55,7 @@ class pixelit {
    * @param {string} src Change the src from the image element
    */
   setFromImgSource(src) {
-    this.drawfrom.src = src;
+    if (this.drawfrom) this.drawfrom.src = src;
     return this;
   }
 
@@ -64,6 +65,7 @@ class pixelit {
    */
   setDrawFrom(elem) {
     this.drawfrom = elem;
+    this.hideFromImg();
     return this;
   }
 
@@ -73,6 +75,7 @@ class pixelit {
    */
   setDrawTo(elem) {
     this.drawto = elem;
+    this.ctx = this.drawto.getContext("2d");
     return this;
   }
 
@@ -132,7 +135,8 @@ class pixelit {
     let max;
     let d = 0;
     for (i = 0, max = rgbColor.length; i < max; i++) {
-      d += (rgbColor[i] - compareColor[i]) * (rgbColor[i] - compareColor[i]);
+      const diff = rgbColor[i] - compareColor[i];
+      d += diff * diff;
     }
     return Math.sqrt(d);
   }
@@ -143,83 +147,51 @@ class pixelit {
    * @returns {array} aproximated rgb color
    */
   similarColor(actualColor) {
-    let selectedColor = [];
-    let currentSim = this.colorSim(actualColor, this.palette[0]);
-    let nextColor;
-    this.palette.forEach((color) => {
-      nextColor = this.colorSim(actualColor, color);
+    let selectedColor = this.palette[0];
+    let currentSim = this.colorSim(actualColor, selectedColor);
+    for (let i = 1; i < this.palette.length; i++) {
+      const color = this.palette[i];
+      const nextColor = this.colorSim(actualColor, color);
       if (nextColor <= currentSim) {
         selectedColor = color;
         currentSim = nextColor;
       }
-    });
+    }
     return selectedColor;
   }
-  //TODO someday
-  /**
-   * After image is pixelated returns
-   * @returns {object} { color : quantity }
-   */
-  /*
-    getColorStats(){
-      return this.endColorStats;
-    }
-    */
-  /**
-   * Sets image last color stats
-   */
-  /*
-    _setColorStats(stats={}){
-      this.endColorStats = stats;
-    }
-    */
-  /**
-   * Auxiliar function to count colors
-   * @param {string,object} color, current object count
-   * @returns {object} {color : quantity}
-   */
-  /*
-  _countColor(color=null,colorCount={}){
-      if(!color){ return colorCount; }
-      if(colorCount[color]){
-        colorCount[color] += parseInt(colorCount[color]) + 1;
-      }
-      else {
-        colorCount[color] = 1;
-      }
-      return colorCount;
-  }
-  */
-  //TODO end
 
   /**
    * pixelate based on @author rogeriopvl <https://github.com/rogeriopvl/8bit>
    * Draws a pixelated version of an image in a given canvas
    */
   pixelate() {
-    this.drawto.width = this.drawfrom.naturalWidth;
-    this.drawto.height = this.drawfrom.naturalHeight;
-    let scaledW = this.drawto.width * this.scale;
-    let scaledH = this.drawto.height * this.scale;
+    if (!this.drawfrom) return this;
+    const natW = this.drawfrom.naturalWidth || this.drawfrom.width;
+    const natH = this.drawfrom.naturalHeight || this.drawfrom.height;
+    this.drawto.width = natW;
+    this.drawto.height = natH;
+
+    // do not mutate user-defined this.scale; use local working scale
+    let workScale = this.scale;
+    let scaledW = natW * workScale;
+    let scaledH = natH * workScale;
 
     //make temporary canvas to make new scaled copy
     const tempCanvas = document.createElement("canvas");
 
     // Set temp canvas width/height & hide (fixes higher scaled cutting off image bottom)
-    tempCanvas.width = this.drawto.width;
-    tempCanvas.height = this.drawto.height;
+    tempCanvas.width = natW;
+    tempCanvas.height = natH;
     tempCanvas.style.visibility = "hidden";
     tempCanvas.style.position = "fixed";
     tempCanvas.style.top = "0";
     tempCanvas.style.left = "0";
 
     //corner case of bigger images, increase the temporary canvas size to fit everything
-    if (this.drawto.width > 900 || this.drawto.height > 900) {
-      //fix sclae to pixelate bigger images
-      this.scale *= 0.5;
-      scaledW = this.drawto.width * this.scale;
-      scaledH = this.drawto.height * this.scale;
-      //make it big enough to fit
+    if (natW > 900 || natH > 900) {
+      workScale *= 0.5;
+      scaledW = natW * workScale;
+      scaledH = natH * workScale;
       tempCanvas.width = Math.max(scaledW, scaledH) + 50;
       tempCanvas.height = Math.max(scaledW, scaledH) + 50;
     }
@@ -228,36 +200,28 @@ class pixelit {
     // draw the image into the canvas
     tempContext.drawImage(this.drawfrom, 0, 0, scaledW, scaledH);
     document.body.appendChild(tempCanvas);
+
     //configs to pixelate
     this.ctx.mozImageSmoothingEnabled = false;
     this.ctx.webkitImageSmoothingEnabled = false;
     this.ctx.imageSmoothingEnabled = false;
 
     //calculations to remove extra border
-    let finalWidth = this.drawfrom.naturalWidth;
-    if (this.drawfrom.naturalWidth > 300) {
+    let finalWidth = natW;
+    if (natW > 300) {
       finalWidth +=
-        this.drawfrom.naturalWidth > this.drawfrom.naturalHeight
-          ? parseInt(
-              this.drawfrom.naturalWidth / (this.drawfrom.naturalWidth * this.scale)
-            ) / 1.5
-          : parseInt(
-              this.drawfrom.naturalWidth / (this.drawfrom.naturalWidth * this.scale)
-            );
+        natW > natH
+          ? parseInt(natW / (natW * workScale)) / 1.5
+          : parseInt(natW / (natW * workScale));
     }
-    let finalHeight = this.drawfrom.naturalHeight;
-    if (this.drawfrom.naturalHeight > 300) {
+    let finalHeight = natH;
+    if (natH > 300) {
       finalHeight +=
-        this.drawfrom.naturalHeight > this.drawfrom.naturalWidth
-          ? parseInt(
-              this.drawfrom.naturalHeight / (this.drawfrom.naturalHeight * this.scale)
-            ) / 1.5
-          : parseInt(
-              this.drawfrom.naturalHeight / (this.drawfrom.naturalHeight * this.scale)
-            );
+        natH > natW
+          ? parseInt(natH / (natH * workScale)) / 1.5
+          : parseInt(natH / (natH * workScale));
     }
     //draw to final canvas
-    //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
     this.ctx.drawImage(
       tempCanvas,
       0,
@@ -266,8 +230,8 @@ class pixelit {
       scaledH,
       0,
       0,
-      finalWidth, //+ Math.max(24, 25 * this.scale),
-      finalHeight //+ Math.max(24, 25 * this.scale)
+      finalWidth,
+      finalHeight
     );
     //remove temp element
     tempCanvas.remove();
@@ -281,17 +245,15 @@ class pixelit {
   convertGrayscale() {
     const w = this.drawto.width;
     const h = this.drawto.height;
-    var imgPixels = this.ctx.getImageData(0, 0, w, h);
-    for (var y = 0; y < imgPixels.height; y++) {
-      for (var x = 0; x < imgPixels.width; x++) {
-        var i = y * 4 * imgPixels.width + x * 4;
-        var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
-        imgPixels.data[i] = avg;
-        imgPixels.data[i + 1] = avg;
-        imgPixels.data[i + 2] = avg;
-      }
+    const imgPixels = this.ctx.getImageData(0, 0, w, h);
+    const data = imgPixels.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i] = avg;
+      data[i + 1] = avg;
+      data[i + 2] = avg;
     }
-    this.ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+    this.ctx.putImageData(imgPixels, 0, 0);
     return this;
   }
 
@@ -301,22 +263,15 @@ class pixelit {
   convertPalette() {
     const w = this.drawto.width;
     const h = this.drawto.height;
-    var imgPixels = this.ctx.getImageData(0, 0, w, h);
-    for (var y = 0; y < imgPixels.height; y++) {
-      for (var x = 0; x < imgPixels.width; x++) {
-        var i = y * 4 * imgPixels.width + x * 4;
-        //var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
-        const finalcolor = this.similarColor([
-          imgPixels.data[i],
-          imgPixels.data[i + 1],
-          imgPixels.data[i + 2],
-        ]);
-        imgPixels.data[i] = finalcolor[0];
-        imgPixels.data[i + 1] = finalcolor[1];
-        imgPixels.data[i + 2] = finalcolor[2];
-      }
+    const imgPixels = this.ctx.getImageData(0, 0, w, h);
+    const data = imgPixels.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const finalcolor = this.similarColor([data[i], data[i + 1], data[i + 2]]);
+      data[i] = finalcolor[0];
+      data[i + 1] = finalcolor[1];
+      data[i + 2] = finalcolor[2];
     }
-    this.ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+    this.ctx.putImageData(imgPixels, 0, 0);
     return this;
   }
 
@@ -325,20 +280,17 @@ class pixelit {
    * height takes precedence if definied
    */
   resizeImage() {
-    //var ctx = canvas.getContext("2d")
+    if (!this.maxWidth && !this.maxHeight) {
+      return this;
+    }
+
     const canvasCopy = document.createElement("canvas");
     const copyContext = canvasCopy.getContext("2d");
     let ratio = 1.0;
 
-    //if none defined skip
-    if (!this.maxWidth && !this.maxHeight) {
-      return 0;
-    }
-
     if (this.maxWidth && this.drawto.width > this.maxWidth) {
       ratio = this.maxWidth / this.drawto.width;
     }
-    //max height overrides max width
     if (this.maxHeight && this.drawto.height > this.maxHeight) {
       ratio = this.maxHeight / this.drawto.height;
     }
@@ -347,8 +299,8 @@ class pixelit {
     canvasCopy.height = this.drawto.height;
     copyContext.drawImage(this.drawto, 0, 0);
 
-    this.drawto.width = this.drawto.width * ratio;
-    this.drawto.height = this.drawto.height * ratio;
+    this.drawto.width = Math.max(1, this.drawto.width * ratio);
+    this.drawto.height = Math.max(1, this.drawto.height * ratio);
     this.ctx.drawImage(
       canvasCopy,
       0,
@@ -369,12 +321,12 @@ class pixelit {
    *
    */
   draw() {
-    //draw image to canvas
-    this.drawto.width = this.drawfrom.width;
-    this.drawto.height = this.drawfrom.height;
-    //draw
+    if (!this.drawfrom) return this;
+    const w = this.drawfrom.naturalWidth || this.drawfrom.width;
+    const h = this.drawfrom.naturalHeight || this.drawfrom.height;
+    this.drawto.width = w;
+    this.drawto.height = h;
     this.ctx.drawImage(this.drawfrom, 0, 0);
-    //resize is always done
     this.resizeImage();
     return this;
   }
