@@ -1,7 +1,7 @@
 # Pixel It
 
 Javascript library to create pixel art from an image.
-SeeSee [Pixel It](https://giventofly.github.io/pixelit#tryit) in action.
+See [Pixel It](https://giventofly.github.io/pixelit#tryit) in action.
 
 ### Index
 
@@ -105,6 +105,19 @@ Run `npm install` to install the needed files, edit javascript from `/src/` fold
 You have inside the docs page a [tests](https://giventofly.github.io/pixelit/tests.html) page to check changes to different image sizes.
 
 ## Changelog
+
+### 2025-10-01
+
+Fixes done by [pickadark](https://github.com/pickadark)
+
+* Preserve user scale
+* Update ctx when changing canvas
+* Add null-safety
+* Use natural size
+* Chainable returns
+* Clamped resize
+* Comment consistency
+* Scale range corrected to 0–50
 
 ### 2025-5-21
 
