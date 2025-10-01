@@ -1,7 +1,7 @@
 # Pixel It
 
 Javascript library to create pixel art from an image.
-See [Pixel It](https://giventofly.github.io/pixelit#tryit) in action.
+SeeSee [Pixel It](https://giventofly.github.io/pixelit#tryit) in action.
 
 ### Index
 
