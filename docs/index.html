@@ -53,7 +53,11 @@
 <div class="container maxwidth" id="tryit">
   <div class="selectors">
     <!--upload image -->
+    <span id="uploadspan">
     <label id="uploadimage" for="pixlInput">Upload Image<input type="file" class="inputbtn" id="pixlInput"></label>
+    <!--upload palette -->
+    <label id="uploadpalettelabel" for="uploadpalettefile">Load palette <input type="file" class="inputbtn" id="uploadpalettefile" accepts=".hex, .txt"></label>
+    </span>
     <!-- block size -->
     <label for="blocksize" class="inputbtn">Block size<span id="blockvalue">7</span><input value="7" type="range" min="2" max="25" id="blocksize"></label>
     <!-- greyscale -->
