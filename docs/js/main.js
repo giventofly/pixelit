@@ -194,6 +194,43 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   };
 
+  //load color to palette
+  const fileInput = document.getElementById('uploadpalettefile');
+  fileInput.onchange = function (e) {
+      const file = fileInput.files[0];
+      if (!file) {
+          return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+          // Remove the previous palette
+          const currentPalette = document.getElementById('currentpallete');
+          while (currentPalette.firstChild) {
+              currentPalette.removeChild(currentPalette.firstChild);
+          }
+
+          const rawData = event.target.result;
+          // This can handle ';' comments, hexvalues separated by ',' and by newline
+          const textByteData = rawData.split(/[\r\n,]/).filter(elem => elem && elem[0] != ';');
+          textByteData.forEach(color => {
+              // Data might be prefixed by something like 0x or FF
+              color = color.slice(-6);
+              const colorSpan = document.createElement('span');
+              colorSpan.style.backgroundColor = `#${color}`;
+              colorSpan.dataset.color = rgbToInt(`#${color}`).join(',');
+              colorSpan.classList.add('colorblock');
+              document.getElementById('currentpallete').appendChild(colorSpan);
+          });
+      };
+
+      reader.onerror = (err) => {
+          console.error("Failed to read file: ", err);
+      };
+
+      reader.readAsText(file);
+  };
+
   //add color to palette
   const addColor = document.getElementById('addcustomcolor');
   addColor.addEventListener('click', () => {

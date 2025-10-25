@@ -306,6 +306,11 @@ header {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  #uploadspan {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+  }
   label {
     display: inline-flex;
     align-items: center;
@@ -315,7 +320,7 @@ header {
     text-transform: uppercase;
     //font-size:14px;
     flex-shrink: 1;
-    &#uploadimage {
+    &#uploadimage, &#uploadpalettelabel {
       flex-grow: 1;
       margin-right: auto;
       width: 100%;
