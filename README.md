@@ -106,6 +106,12 @@ You have inside the docs page a [tests](https://giventofly.github.io/pixelit/tes
 
 ## Changelog
 
+### 2025-11-05
+
+Upgrade done by [RGExpert](https://github.com/RGExpert)
+
+* Add the option to upload a palette (hex, csv, etc) in the live test page
+
 ### 2025-10-01
 
 Fixes done by [pickadark](https://github.com/pickadark)
