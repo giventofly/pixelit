@@ -43,20 +43,18 @@ body {
   padding: 25px 25px;
   margin: 0 auto;
 }
-
 .wrap p {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
-
 .wrap img {
   margin: 0 auto;
   position: relative;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  max-width: calc(100%);
+  max-width: 100%;
   border: solid 5px #fdfdfd;
 }
 
@@ -69,23 +67,19 @@ header {
   background-color: #21383a;
   padding: 50px 25px;
 }
-
 header h1 {
   font-size: 6rem;
   margin-top: 0;
 }
-
 header h1 span {
   color: #c1563d;
 }
-
 header p {
   max-width: 600px;
   line-height: 1.4;
   margin: 25px auto;
   text-align: center;
 }
-
 header .actions {
   margin: 35px 0;
   display: -webkit-box;
@@ -102,7 +96,7 @@ header .actions {
 }
 
 .inputbtn {
-  background-color: #d1aa09;
+  background-color: rgb(208.9543568465, 170.0580912863, 9.0456431535);
   color: #fdfdfd;
   font-size: 1rem;
   padding: 10px 10px;
@@ -115,59 +109,54 @@ header .actions {
   color: #fdfdfd;
   font-size: 1.5rem;
   text-decoration: none;
-  background-color: #d1aa09;
+  background-color: rgb(208.9543568465, 170.0580912863, 9.0456431535);
   font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
   position: relative;
   z-index: 10;
   border: 0;
 }
-
 .btn.small {
   margin: 5px 0;
   font-size: 1rem;
   font-family: "Open Sans", sans-serif;
 }
-
 .btn:after {
   position: absolute;
   top: -5px;
   left: 5px;
-  background-color: #d1aa09;
+  background-color: rgb(208.9543568465, 170.0580912863, 9.0456431535);
   width: calc(100% - 10px);
   height: 100%;
   content: "";
   z-index: -1;
 }
-
 .btn:before {
   position: absolute;
   bottom: -5px;
   right: 5px;
-  background-color: #d1aa09;
+  background-color: rgb(208.9543568465, 170.0580912863, 9.0456431535);
   width: calc(100% - 10px);
   height: 100%;
   content: "";
   z-index: -1;
 }
-
 .btn.call {
   background-color: #c1563d;
 }
-
 .btn.call:after, .btn.call:before {
   background-color: #c1563d;
 }
 
 .example,
 .docs {
-  background-color: rgba(209, 170, 9, 0.5);
+  background-color: rgba(208.9543568465, 170.0580912863, 9.0456431535, 0.5);
   color: #21383a;
 }
 
 .working,
 .links {
-  background-color: #2a484a;
+  background-color: rgb(42.2472527473, 71.6923076923, 74.2527472527);
 }
 
 .links .wrap {
@@ -187,12 +176,13 @@ header .actions {
 .infoselects {
   width: 100%;
 }
-
+.infoselects h3 {
+  margin-top: 24px;
+}
 .infoselects p {
   text-align: left;
   margin-left: 0;
 }
-
 .infoselects button.btn {
   cursor: pointer;
 }
@@ -213,7 +203,6 @@ header .actions {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-
 .colorpalette .text {
   margin-right: 15px;
   margin-bottom: 10px;
@@ -230,12 +219,10 @@ header .actions {
       flex-wrap: wrap;
   width: 100%;
 }
-
 .colorpalette .text button {
   margin-right: 16px;
   margin-bottom: 0px;
 }
-
 .colorpalette .icons {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -249,7 +236,6 @@ header .actions {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-
 .colorpalette .colorblock {
   margin-right: 2px;
   margin-bottom: 0px;
@@ -258,33 +244,27 @@ header .actions {
   width: 25px !important;
   border: solid 0px white;
 }
-
 .colorpalette .ss-main {
-  width: calc(100%);
+  width: 100%;
   margin-top: 8px;
   max-width: 480px;
 }
-
 .colorpalette .ss-main .ss-single-selected {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  width: calc(100%);
+  width: 100%;
   background-color: #ececec;
 }
-
 .colorpalette .ss-main .ss-option {
   margin-bottom: 6px;
 }
-
 .colorpalette .ss-main .ss-option:hover {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
-
 .colorpalette .ss-content {
   width: 100%;
 }
-
 .colorpalette .ss-content .ss-list .ss-option {
   padding: 0px 10px;
 }
@@ -301,7 +281,6 @@ header .actions {
       -ms-flex-align: center;
           align-items: center;
 }
-
 #custompalette input {
   margin-right: 12px;
 }
@@ -341,7 +320,15 @@ header .actions {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-
+.selectors #uploadspan {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
 .selectors label {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -358,8 +345,7 @@ header .actions {
   -ms-flex-negative: 1;
       flex-shrink: 1;
 }
-
-.selectors label#uploadimage {
+.selectors label#uploadimage, .selectors label#uploadpalettelabel {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -376,42 +362,35 @@ header .actions {
       -ms-flex-align: start;
           align-items: flex-start;
 }
-
-.selectors label#uploadimage input {
+.selectors label#uploadimage input, .selectors label#uploadpalettelabel input {
   margin: 5px 0;
   padding: 3px;
 }
-
-@media (max-width: 550px) {
+@media (max-width : 550px) {
   .selectors label {
-    width: calc(100%);
+    width: 100%;
   }
 }
-
 .selectors label span {
   display: inline-block;
   width: 40px;
   margin-left: 5px;
   text-align: center;
 }
-
 .selectors label input {
   margin-left: 5px;
   padding: 3px;
 }
-
-.selectors label input[type="range"] {
+.selectors label input[type=range] {
   width: 100px;
 }
-
-.selectors label input[type="input"] {
+.selectors label input[type=input] {
   width: 50px;
 }
 
 .dothings {
   margin-top: 15px;
 }
-
 .dothings button {
   border: 0;
   margin-top: 10px;
@@ -423,28 +402,24 @@ header .actions {
   text-align: left;
   margin-left: 0;
 }
-
 .docs .wrap p.api {
   font-style: italic;
   padding-left: 10px;
   margin-top: 15px;
   line-height: 1.2;
 }
-
 .docs .wrap p.api strong {
   font-style: normal;
   font-weight: 700;
 }
-
 .docs .wrap pre {
   padding: 10px;
   margin: 10px 0;
-  background-color: #e8f1f2;
+  background-color: rgb(231.7362637363, 240.9615384615, 241.7637362637);
   overflow-x: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-
 .docs .wrap h3 {
   font-size: 1.8rem;
   margin-top: 50px;
@@ -468,7 +443,6 @@ header .actions {
           align-items: center;
   background-color: rgba(33, 56, 58, 0.4);
 }
-
 .loader.active {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -603,11 +577,9 @@ header .actions {
     opacity: 0;
   }
 }
-
 .tip {
   margin-top: 12px;
 }
-
 .tip p {
   text-align: left;
   -webkit-box-pack: start;
@@ -621,7 +593,6 @@ header .actions {
   font-size: 1rem;
   line-height: 2;
 }
-
 .tip a {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -629,7 +600,6 @@ header .actions {
   margin-left: 6px;
   margin-right: 6px;
 }
-
 .tip a img {
   border: 0;
   max-width: unset;

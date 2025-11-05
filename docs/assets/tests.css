@@ -42,9 +42,8 @@ body {
   overflow-x: hidden;
   padding: 12px;
   color: #21383a;
-  background-color: #e4e4e4;
+  background-color: rgb(227.5, 227.5, 227.5);
 }
-
 body a {
   color: #21383a;
 }
@@ -54,13 +53,11 @@ body a {
   padding: 25px 0px;
   margin: 0 auto;
 }
-
 #content p {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
-
 #content img,
 #content canvas {
   max-width: calc(50% - 24px);
@@ -70,11 +67,9 @@ body a {
   width: 100%;
   display: inline-block;
 }
-
 #content canvas {
   margin-left: 24px;
 }
-
 #content .block {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -91,7 +86,6 @@ body a {
           align-items: center;
   margin-bottom: 50px;
 }
-
 #content .block .inner {
   display: -webkit-box;
   display: -ms-flexbox;

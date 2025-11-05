@@ -209,6 +209,9 @@ header {
 }
 .infoselects {
   width: 100%;
+  h3 {
+    margin-top: 24px;
+  }
   p {
     text-align: left;
     margin-left: 0;
@@ -320,7 +323,8 @@ header {
     text-transform: uppercase;
     //font-size:14px;
     flex-shrink: 1;
-    &#uploadimage, &#uploadpalettelabel {
+    &#uploadimage,
+    &#uploadpalettelabel {
       flex-grow: 1;
       margin-right: auto;
       width: 100%;

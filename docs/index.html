@@ -55,9 +55,7 @@
     <!--upload image -->
     <span id="uploadspan">
     <label id="uploadimage" for="pixlInput">Upload Image<input type="file" class="inputbtn" id="pixlInput"></label>
-    <!--upload palette -->
-    <label id="uploadpalettelabel" for="uploadpalettefile">Load palette <input type="file" class="inputbtn" id="uploadpalettefile" accepts=".hex, .txt"></label>
-    </span>
+  </span>
     <!-- block size -->
     <label for="blocksize" class="inputbtn">Block size<span id="blockvalue">7</span><input value="7" type="range" min="1" max="50" id="blocksize"></label>
     <!-- greyscale -->
@@ -80,9 +78,16 @@
 
     </div>
    </div>
+   <div class="infoselects">
+    <h3>Upload palette</h3>
+    <p>The user can upload a palette file, Works for .hex files, pixilart.com txt files, Paint.net TXT files and probably others as long as they are in a csv-like format.</p>
+    <!--upload palette -->
+    <label id="uploadpalettelabel" for="uploadpalettefile">Upload palette <input type="file" class="inputbtn" id="uploadpalettefile" accepts=".hex, .txt"></label>
+  
+   </div>
    <!-- custom palette -->
    <div class="infoselects">
-    <h3>Custom palette</h3>
+    <h3>Manual palette</h3>
     <p>Click on the color to change it</p>
     <div class="custompalette" id="custompalette">
       <input type="color" name="customcolor" id="customcolor">
@@ -103,7 +108,7 @@
 
   <canvas id="pixelitcanvas"></canvas>
   <div class="tip">
-    <p>Did you find this real useful or just want to give some tip? <a href="https://www.buymeacoffee.com/giventofly" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee"  ></a> or you can can also send me some ADA: addr1q8kc33nwrysx9wc4znm9xdlvst7eq87ear0jx2n23zzjna7su5y05wag5gtgalm53gxjg4hgv3jayjc3msv57lu56psqa07hdp</p>
+    <p>Did you find this real useful or just want to give some tip? <a href="https://www.buymeacoffee.com/giventofly" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee"  ></a></p>
    </div>
  </div>
 
