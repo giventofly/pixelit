@@ -177,21 +177,70 @@ return unique_array;
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  //load image to canvas
+  //*** uploaded images (supports multiple files at once)
+  let uploadedImages = []; // [{ name, url }]
+  let currentImage = -1; // -1 = default image
+  const imgElem = document.getElementById("pixelitimg");
+  const fileList = document.getElementById("filelist");
+  const downloadAllBtn = document.getElementById("downloadall");
+
+  //load an image src into the source element and wait until it is ready
+  const loadImage = (src) =>
+    new Promise((resolve, reject) => {
+      imgElem.onload = () => resolve();
+      imgElem.onerror = () => reject(new Error("Could not load image"));
+      px.setFromImgSource(src);
+      //already loaded (same src)
+      if (imgElem.complete && imgElem.naturalWidth && imgElem.src === src) {
+        resolve();
+      }
+    });
+
+  //build a download name from the original file name
+  const outputName = (name) =>
+    (name ? name.replace(/\.[^.]+$/, "") : "pxArt") + "-pixelit.png";
+
+  //show the list of uploaded files so the user can switch between them
+  const renderFileList = () => {
+    fileList.innerHTML = "";
+    uploadedImages.forEach((image, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "fileitem" + (i === currentImage ? " active" : "");
+      btn.title = image.name;
+      const thumb = document.createElement("img");
+      thumb.src = image.url;
+      thumb.alt = image.name;
+      const label = document.createElement("span");
+      label.textContent = image.name;
+      btn.appendChild(thumb);
+      btn.appendChild(label);
+      btn.addEventListener("click", () => selectImage(i));
+      fileList.appendChild(btn);
+    });
+    downloadAllBtn.style.display = uploadedImages.length > 1 ? "" : "none";
+  };
+
+  const selectImage = (i) => {
+    currentImage = i;
+    renderFileList();
+    return loadImage(uploadedImages[i].url)
+      .then(() => pixelit())
+      .catch(() => alert(`Could not open "${uploadedImages[i].name}"`));
+  };
+
   document.getElementById("pixlInput").onchange = function (e) {
-    var img = new Image();
-    img.src = URL.createObjectURL(this.files[0]);
-    img.onload = () => {
-      //create element
-      //document.getElementById('teste').src = img.src;
-      px.setFromImgSource(img.src);
-      pixelit();
-      //.pixelate()
-      //.convertGrayscale()
-      //.convertPalette();
-      //.saveImage();
-      //console.log(px.getPalette());
-    };
+    const files = Array.from(this.files).filter((f) =>
+      f.type.startsWith("image/")
+    );
+    if (!files.length) return;
+    //release previous images
+    uploadedImages.forEach((image) => URL.revokeObjectURL(image.url));
+    uploadedImages = files.map((file) => ({
+      name: file.name,
+      url: URL.createObjectURL(file),
+    }));
+    selectImage(0);
   };
 
   //load color to palette
@@ -356,10 +405,42 @@ document.addEventListener("DOMContentLoaded", function () {
   */
   //downloadimage options
   const downloadimage = document.querySelector("#downloadimage");
-
   downloadimage.addEventListener("click", function (e) {
-    //download image
-    px.saveImage();
+    const image = uploadedImages[currentImage];
+    px.saveImage(outputName(image && image.name));
+  });
+
+  //download every uploaded image with the current settings
+  downloadAllBtn.addEventListener("click", function (e) {
+    if (!uploadedImages.length) return;
+    const previous = currentImage;
+    const total = uploadedImages.length;
+    downloadAllBtn.disabled = true;
+    //process images one after another
+    const next = (i) => {
+      if (i >= total) return Promise.resolve();
+      downloadAllBtn.textContent = `Downloading ${i + 1}/${total}`;
+      return loadImage(uploadedImages[i].url)
+        .then(() => {
+          pixelit();
+          return px.saveImage(outputName(uploadedImages[i].name));
+        })
+        .then((ok) => {
+          if (!ok) return; //stop if downloads are not possible
+          //small pause so the browser doesn't drop downloads
+          return new Promise((r) => setTimeout(r, 300)).then(() => next(i + 1));
+        })
+        .catch((err) => {
+          console.error(err);
+          return next(i + 1);
+        });
+    };
+    next(0).then(() => {
+      downloadAllBtn.textContent = "Download All";
+      downloadAllBtn.disabled = false;
+      //go back to the image that was being viewed
+      selectImage(previous);
+    });
   });
 
   //run on page boot to pixelit default image

@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
- <link rel="stylesheet" href="assets/style.min.css?v1.1">
+ <link rel="stylesheet" href="assets/style.min.css?v1.2">
  <link rel="stylesheet" href="assets/slim.select.css">
  <title>Pixel It - Create pixel art from an image</title>
 </head>
@@ -54,8 +54,10 @@
   <div class="selectors">
     <!--upload image -->
     <span id="uploadspan">
-    <label id="uploadimage" for="pixlInput">Upload Image<input type="file" class="inputbtn" id="pixlInput"></label>
+    <label id="uploadimage" for="pixlInput">Upload Image(s)<input type="file" class="inputbtn" id="pixlInput" accept="image/*" multiple></label>
   </span>
+    <!-- uploaded files, click one to edit it -->
+    <div id="filelist" class="filelist"></div>
     <!-- block size -->
     <label for="blocksize" class="inputbtn">Block size<span id="blockvalue">7</span><input value="7" type="range" min="1" max="50" id="blocksize"></label>
     <!-- greyscale -->
@@ -101,7 +103,8 @@
    </div>
    <div class="dothings">
    <!-- download image -->
-   <Button id="downloadimage" class="btn small call">Download Image</Button>
+   <button id="downloadimage" class="btn small call">Download Image</button>
+   <button id="downloadall" class="btn small call" style="display:none">Download All</button>
    </div>
 
   </div>
@@ -162,7 +165,8 @@ config = {
 <p class="api"><strong>.convertpalette()</strong> converts image with the defined color palette, apply only after .draw is called</p>
 <p class="api"><strong>.resizeImage()</strong> resizes the output image if bigger than the defined max Height or max Width</p>
 <p class="api"><strong>.pixelate()</strong> draws a pixelated version of the from image to the to canvas, , apply only after .draw is called</p>
-<p class="api"><strong>.saveImage()</strong> saves/downloads current image</p>
+<p class="api"><strong>.saveImage(filename)</strong> saves/downloads current image as a png (filename defaults to pxArt.png), returns a promise</p>
+<p class="api"><strong>.getImageBlob()</strong> returns a promise with the current image as a png Blob</p>
 
 
 </div>
@@ -174,9 +178,9 @@ config = {
   </div></section>
   <img src="assets/sky.jpg"  id="pixelitimg" alt="">
   <!--<img style="visibility: hidden;" id="pixlimg" alt="">  -->
-  <script src="js/pixelit.min.js"></script>
+  <script src="js/pixelit.min.js?v2"></script>
   <script src="js/slim.select.min.js"></script>
-  <script src="js/main.min.js?v1"></script>
+  <script src="js/main.min.js?v2"></script>
   <!-- loader-->
   <div class="loader">
     <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
