@@ -614,3 +614,45 @@ header .actions {
   -o-object-fit: contain;
      object-fit: contain;
 }
+.filelist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+.filelist:empty {
+  display: none;
+}
+.filelist .fileitem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  padding: 4px;
+  border: solid 2px transparent;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  cursor: pointer;
+}
+.filelist .fileitem.active {
+  border-color: #fff;
+}
+.filelist .fileitem img {
+  width: 100%;
+  height: 60px;
+  object-fit: cover;
+  left: auto;
+  transform: none;
+  border: 0;
+  margin: 0;
+}
+.filelist .fileitem span {
+  width: 100%;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dothings button + button {
+  margin-left: 10px;
+}

@@ -335,15 +335,50 @@ class pixelit {
    * Save image from canvas
    */
 
-  saveImage() {
-    const link = document.createElement("a");
-    link.download = "pxArt.png";
-    link.href = this.drawto
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    document.querySelector("body").appendChild(link);
-    link.click();
-    document.querySelector("body").removeChild(link);
+  /**
+   * Get the current canvas image as a png Blob
+   * @returns {Promise<Blob>}
+   */
+  getImageBlob() {
+    return new Promise((resolve, reject) => {
+      try {
+        this.drawto.toBlob((blob) => {
+          blob ? resolve(blob) : reject(new Error("Could not create image"));
+        }, "image/png");
+      } catch (err) {
+        //canvas is "tainted" (e.g. page opened from file:// or cross-origin image)
+        reject(err);
+      }
+    });
+  }
+
+  /**
+   * Save image from canvas
+   * @param {string} filename name of the downloaded file, defaults to pxArt.png
+   * @returns {Promise<boolean>} resolves true if the download started
+   */
+  saveImage(filename = "pxArt.png") {
+    return this.getImageBlob()
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = filename;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        //give the browser time to start the download before releasing it
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        return true;
+      })
+      .catch((err) => {
+        console.error("pixelit: unable to save image", err);
+        alert(
+          "Unable to download the image. If you opened this page directly from your computer (file://), " +
+            "upload an image first or open the page through a web server."
+        );
+        return false;
+      });
   }
 
   //end class
