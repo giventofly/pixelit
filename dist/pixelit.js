@@ -355,7 +355,7 @@ class pixelit {
   /**
    * Save image from canvas
    * @param {string} filename name of the downloaded file, defaults to pxArt.png
-   * @returns {Promise<boolean>} resolves true if the download started
+   * @returns {Promise<boolean>} resolves true if the download started, false if it failed
    */
   saveImage(filename = "pxArt.png") {
     return this.getImageBlob()
@@ -372,11 +372,8 @@ class pixelit {
         return true;
       })
       .catch((err) => {
+        //no UI here: callers decide how to report the failure
         console.error("pixelit: unable to save image", err);
-        alert(
-          "Unable to download the image. If you opened this page directly from your computer (file://), " +
-            "upload an image first or open the page through a web server."
-        );
         return false;
       });
   }

@@ -404,10 +404,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   */
   //downloadimage options
+  //tell the user why a download failed (pixelit.saveImage only resolves false)
+  const downloadFailed = () =>
+    alert(
+      "Unable to download the image. If you opened this page directly from your computer (file://), " +
+        "upload an image first or open the page through a web server."
+    );
+
   const downloadimage = document.querySelector("#downloadimage");
   downloadimage.addEventListener("click", function (e) {
     const image = uploadedImages[currentImage];
-    px.saveImage(outputName(image && image.name));
+    px.saveImage(outputName(image && image.name)).then((ok) => {
+      if (!ok) downloadFailed();
+    });
   });
 
   //download every uploaded image with the current settings
@@ -426,7 +435,7 @@ document.addEventListener("DOMContentLoaded", function () {
           return px.saveImage(outputName(uploadedImages[i].name));
         })
         .then((ok) => {
-          if (!ok) return; //stop if downloads are not possible
+          if (!ok) return downloadFailed(); //stop if downloads are not possible
           //small pause so the browser doesn't drop downloads
           return new Promise((r) => setTimeout(r, 300)).then(() => next(i + 1));
         })
